@@ -135,6 +135,19 @@ fun InstagramScreen() {
         ) {
             selectedTabIndex = it
         }
+        when (selectedTabIndex) {
+            0 -> PostSection(
+                posts = listOf(
+                    painterResource(id = R.drawable.kmm),
+                    painterResource(id = R.drawable.intermediate_dev),
+                    painterResource(id = R.drawable.master_logical_thinking),
+                    painterResource(id = R.drawable.bad_habits),
+                    painterResource(id = R.drawable.multiple_languages),
+                    painterResource(id = R.drawable.learn_coding_fast),
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
 
     }
 }
@@ -376,7 +389,71 @@ fun PostTabView(
             }
         }
     }
+    @Composable
+    fun PostTabView(
+        modifier: Modifier = Modifier,
+        imageWithTexts: List<ImageWithText>,
+        onTabSelected: (selectedIndex: Int) -> Unit
+    ) {
+        var selectedTabIndex by remember {
+            mutableStateOf(0)
+        }
+        val inactiveColor = Color(0xFF777777)
+        TabRow(
+            selectedTabIndex = selectedTabIndex,
+            contentColor = Color.Black,
+            modifier = modifier
+        ) {
+            imageWithTexts.forEachIndexed { index, item ->
+                Tab(
+                    selected = selectedTabIndex == index,
+                    selectedContentColor = Color.Black,
+                    unselectedContentColor = inactiveColor,
+                    onClick = {
+                        selectedTabIndex = index
+                        onTabSelected(index)
+                    }
+                ) {
+                    Icon(
+                        painter = item.image,
+                        contentDescription = item.text,
+                        tint = if (selectedTabIndex == index) Color.Black else inactiveColor,
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .size(20.dp)
+                    )
+                }
+            }
+        }
+    }
 }
+
+@ExperimentalFoundationApi
+@Composable
+fun PostSection(
+    posts: List<Painter>,
+    modifier: Modifier = Modifier
+) {
+    LazyVerticalGrid(
+        GridCells.Fixed(3),
+
+        ) {
+        items(posts.size) {
+            Image(
+                painter = posts[it],
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .border(
+                        width = 1.dp,
+                        color = Color.White
+                    )
+            )
+        }
+    }
+}
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
