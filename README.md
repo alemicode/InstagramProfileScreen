@@ -3,7 +3,7 @@
 Android example with Instagram profile UI with jetpack compose and reusable components
 
 <p float="center">
-    <img src="screenshots/image1.ong" width ="200">
+    <img src="screenshots/image1.png" width ="200">
   
 </p>
 ## Technology
