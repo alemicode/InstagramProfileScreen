@@ -2,10 +2,6 @@
 
 Android example with Instagram profile UI with jetpack compose and reusable components
 
-<p float="center">
-    <img src="screenshots/image.png" width ="200">
-  
-</p>
 ## Technology
 
 - kotlin
